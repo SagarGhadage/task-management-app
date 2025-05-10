@@ -7,9 +7,19 @@ import TaskCard from "./TaskCard";
 
 const TaskList = () => {
   // const { enqueueSnackbar } = useSnackbar();
-  const [isTable, setIsTable] = useState(true);
+  const { tasks, setTasks, handleDelete, onView, onEdit, width } =
+    useOutletContext();
+  const [isTable, setIsTable] = useState(width > 768);
+  console.log(width, "width");
   const navigate = useNavigate();
-  const {tasks, setTasks,handleDelete,onView,onEdit} = useOutletContext();  
+
+  useEffect(() => {
+    if (width > 768) {
+      setIsTable(true);
+    } else {
+      setIsTable(false);
+    }
+  }, [width]);
 
   const headers = ["Title", "Description", "Effort (days)", "Due Date"];
   const rows = tasks?.map((task) => ({
@@ -22,23 +32,7 @@ const TaskList = () => {
 
   return (
     <div className="p-4 bg-gray-100 dark:bg-gray-900">
-      <div className="flex items-center justify-between mb-4 gap-4">
-        <h2 className="mb-4 text-2xl font-bold text-gray-800 dark:text-gray-100">
-           View {" "}
-          <button
-            onClick={() => setIsTable(true)}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
-          >
-            List
-          </button>{" "}
-          <button
-            onClick={() => setIsTable(false)}
-            className="px-4 py-2 text-sm font-medium text-white bg-purple-500 rounded-lg shadow-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
-          >
-            Grid
-          </button>
-        </h2>
-        <div className="flex gap-4">
+      <div className="flex sm:flex-row col-rev items-center justify-between mb-4 gap-4 flex-wrap">
           <button
             onClick={() => navigate("/tasks/create")}
             className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
@@ -52,7 +46,12 @@ const TaskList = () => {
             Import Tasks
           </button>
           <TaskExport />
-        </div>
+          <button
+            onClick={() => setIsTable((prev) => !prev)}
+            className="px-4 py-2 text-sm font-medium text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 hover:scale-110 dark:hover:text-[#ffb600]"
+          >
+            {!isTable ? "Table View" : "Grid View"}
+          </button>{" "}
       </div>
       {isTable && (
         <Table
@@ -67,7 +66,11 @@ const TaskList = () => {
       {!isTable && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {tasks?.map((task) => (
-            <TaskCard key={task?.id} taskDetails={task} onDelete={handleDelete} />
+            <TaskCard
+              key={task?.id}
+              taskDetails={task}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
       )}

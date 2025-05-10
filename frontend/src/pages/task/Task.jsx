@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { deleteTask, getAllTasks } from "../../api/api";
 import { useSnackbar } from "notistack";
-
+import useWindowSize from "../../utils/useWindowSize";
 const Task = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { taskId } = useParams(); // Extract the parameter from the URL
   const navigate = useNavigate();
-  
+  const { width } = useWindowSize();
   const [isEdit, setIsEdit] = React.useState(false);
   const [tasks, setTasks] = React.useState([]);
 
@@ -18,28 +18,34 @@ const Task = () => {
     }
   }, [taskId]);
 
+  const fetchTasks = async () => {
+    try {
+      const response = await getAllTasks();
+      setTasks(response?.tasks || []);
+      enqueueSnackbar("Tasks fetched successfully!", { variant: "success" });
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      enqueueSnackbar("Failed to fetch tasks.", { variant: "error" });
+    }
+  };
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await getAllTasks();
-        setTasks(response?.tasks || []);
-        enqueueSnackbar("Tasks fetched successfully!", { variant: "success" });
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-        enqueueSnackbar("Failed to fetch tasks.", { variant: "error" });
-      }
-    };
     fetchTasks();
   }, []);
+
   const handleDelete = async (taskId) => {
     try {
       await deleteTask(taskId);
       setTasks(tasks.filter((task) => task.id !== taskId));
       enqueueSnackbar("Task deleted successfully!", { variant: "success" });
       navigate("/tasks");
+      await fetchTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
-      enqueueSnackbar("Failed to delete task."+error?.response?.data?.message, { variant: "error" });
+      enqueueSnackbar(
+        "Failed to delete task." + error?.response?.data?.message,
+        { variant: "error" }
+      );
     }
   };
   const onView = async (taskId) => {
@@ -47,10 +53,24 @@ const Task = () => {
   };
   const onEdit = async (taskId) => {
     navigate(`/tasks/update/${taskId}`);
+    await fetchTasks();
   };
+// console.log(width, "width");
   return (
     <div className="task-container mt-4 p-6">
-      <Outlet context={{ isEdit, setIsEdit, tasks:tasks?.length?tasks:[], setTasks,handleDelete,onView,onEdit }} />{" "}
+      <Outlet
+        context={{
+          width,
+          isEdit,
+          setIsEdit,
+          tasks: tasks?.length ? tasks : [],
+          setTasks,
+          handleDelete,
+          onView,
+          onEdit,
+          fetchTasks,
+        }}
+      />{" "}
       {/* Renders the nested route components */}
     </div>
   );
