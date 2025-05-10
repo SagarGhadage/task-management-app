@@ -59,6 +59,7 @@ const TaskForm = () => {
         enqueueSnackbar("Task created successfully", { variant: "success" });
       }
       navigate("/tasks");
+      window.location.reload();
     } catch (error) {
       console.error("Error submitting task:", error);
       enqueueSnackbar("An error occurred while submitting the task: "+error?.response?.data?.message, { variant: "error" });
