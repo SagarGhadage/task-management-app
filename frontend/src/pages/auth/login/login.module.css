@@ -1,0 +1,49 @@
+.cardAction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.loginButton{
+    margin: 10px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.asdf{
+    margin: 20px;
+    width: 250px;
+}
+.title {
+    color: #3e6fc8;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

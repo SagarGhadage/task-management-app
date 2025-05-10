@@ -1,0 +1,81 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navLists {
+    display: flex;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 24px;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+/* Reusable button styles */
+.button {
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:active {
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+}
+
+/* Specific styles for login and register buttons */
+.loginButton {
+    composes: button;
+}
+
+.registerButton {
+    composes: button;
+}
+
+.logoutButton {
+    composes: button;
+}
+
+/* btn groups */
+.authButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.userProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.themeToggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
