@@ -32,7 +32,7 @@ This Task Management Application is a full-stack web application designed to hel
 
 ### Backend
 - **Node.js** with Express.js
-- **MySQL** or **PostgreSQL** for the database
+- **PostgreSQL** for the database 
 - Libraries: `xlsx`, `sequelize`, `passport.js`, `jsonwebtoken`
 
 ### Frontend
@@ -44,6 +44,8 @@ This Task Management Application is a full-stack web application designed to hel
 ### Prerequisites
 - Node.js and npm installed
 - MySQL or PostgreSQL installed and running
+- Update .env file 
+- `create` `database` with name `task_management` or you can use other then update `.env` file
 
 ### Steps
 
@@ -62,10 +64,7 @@ git clone https://github.com/SagarGhadage/task-management-app.git
    npm install
    ```
 3. Configure the database in `config/database.js`.
-4. Run database migrations (if applicable):
-   ```bash
-   npx sequelize-cli db:migrate
-   ```
+
 5. Start the backend server:
    ```bash
    npm start
@@ -80,6 +79,8 @@ git clone https://github.com/SagarGhadage/task-management-app.git
    ```bash
    npm install
    ```
+3. update [api.js backend url](./frontend/src/api/api.js) with backend url
+
 3. Start the frontend development server:
    ```bash
    npm start
