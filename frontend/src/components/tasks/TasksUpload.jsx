@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { importTasks } from "../../api/api";
 import { useSnackbar } from "notistack";
-
+import { useNavigate } from "react-router-dom";
 const TasksUpload = () => {
   const { enqueueSnackbar } = useSnackbar();
-
+const navigate = useNavigate();
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -39,6 +39,8 @@ const TasksUpload = () => {
       if (response?.status === 201) {
         enqueueSnackbar("File uploaded successfully!", { variant: "success" });
         setFile(null);
+        navigate("/");
+        navigate("/tasks");
       } else if (response?.data?.error) {
         enqueueSnackbar(`Error uploading file: ${response?.data?.error}`, {
           variant: "error",

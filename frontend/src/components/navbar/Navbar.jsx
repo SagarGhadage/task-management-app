@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
+// import { useAuth } from "../../context/AuthContex.jsx";
 import { useNavigate, Link } from "react-router-dom";
 import { LightMode, DarkMode, AccountCircle } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContex.jsx";
@@ -16,7 +17,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between mb-2 px-6 py-4 bg-gray-100 dark:bg-gray-800 shadow-lg shadow-gray-500/50 ">
+    <nav className="flex items-center justify-between px-6 py-4 bg-gray-100 shadow dark:bg-gray-800 shadow-md">
         <Link to='/' className="text-2xl font-bold text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors duration-300">
           Task Manager
         </Link>
@@ -25,19 +26,25 @@ export default function Navbar() {
       <div className="flex items-center gap-6">
         <Link
           to="/tasks"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
         >
           View Tasks
         </Link>
         <Link
           to="/tasks/import"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
         >
           Import Tasks
         </Link>
+        {/* <Link
+          to="/tasks/export"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
+        >
+          Export Tasks
+        </Link> */}
         <Link
           to="/tasks/create"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
         >
           Create Task
         </Link>

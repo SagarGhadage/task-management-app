@@ -24,12 +24,12 @@ const TaskList = () => {
     <div className="p-4 bg-gray-100 dark:bg-gray-900">
       <div className="flex items-center justify-between mb-4 gap-4">
         <h2 className="mb-4 text-2xl font-bold text-gray-800 dark:text-gray-100">
-          Task{" "}
+           View {" "}
           <button
             onClick={() => setIsTable(true)}
             className="px-4 py-2 text-sm font-medium text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
           >
-            Table
+            List
           </button>{" "}
           <button
             onClick={() => setIsTable(false)}
@@ -38,30 +38,26 @@ const TaskList = () => {
             Grid
           </button>
         </h2>
-        <div className="mb-4">
+        <div className="flex gap-4">
           <button
             onClick={() => navigate("/tasks/create")}
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
           >
             Create Task
           </button>
-        </div>
-        <div className="mb-4">
           <button
             onClick={() => navigate("/tasks/import")}
-            className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
+            className="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
           >
             Import Tasks
           </button>
-        </div>
-        <div className="mb-4">
           <TaskExport />
         </div>
       </div>
       {isTable && (
         <Table
           headers={headers}
-          list={tasks||[]}
+          list={tasks || []}
           rows={rows}
           onEdit={onEdit}
           onDelete={handleDelete}

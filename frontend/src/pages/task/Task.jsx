@@ -33,8 +33,8 @@ const Task = () => {
   }, []);
   const handleDelete = async (taskId) => {
     try {
-      setTasks(tasks.filter((task) => task.id !== taskId)||[]);
       await deleteTask(taskId);
+      setTasks(tasks.filter((task) => task.id !== taskId));
       enqueueSnackbar("Task deleted successfully!", { variant: "success" });
       navigate("/tasks");
     } catch (error) {
