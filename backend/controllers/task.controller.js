@@ -9,7 +9,7 @@ const pick = require("../utils/pick");
 
 const getTaskById = catchAsync(async (req, res) => {
   const task = await taskService.getTaskById(req.user, req.params.taskId);
-  console.log(task);
+  // console.log(task);
   if (!task) {
     throw new ApiError(
       httpStatus.NOT_FOUND,

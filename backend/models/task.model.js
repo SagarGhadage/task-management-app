@@ -5,7 +5,7 @@ const User = require("./user.model");
 const Task = sequelize.define("Task", {
   id:{
     type: DataTypes.INTEGER,
-    autoIncrement: true, // Auto-incremented ID
+    autoIncrement: true, // Auto-increment ID
     primaryKey: true,
   },
   title: {
@@ -25,11 +25,10 @@ const Task = sequelize.define("Task", {
     allowNull: false,
   },
 }, {
-  timestamps: true, // Adds createdAt and updatedAt fields
+  timestamps: true, // createdAt and updatedAt
   tableName: "tasks",
 });
 
-// Define the relationship between Task and User
 Task.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
 User.hasMany(Task, { foreignKey: "userId" });
 

@@ -10,7 +10,7 @@ const { tokenTypes } = require("../config/tokens");
  *
  * - Token expiration must be set to the value of `expires` parameter
  *
- * @param {ObjectId} userId - Mongo user id
+ * @param {id} userId - user id
  * @param {Number} expires - Token expiration time in seconds
  * @param {string} type - Access token type eg: Access, Refresh etc
  * @param {string} [secret] - Secret key to sign the token, defaults to config.jwt.secret
@@ -28,16 +28,10 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
 
 /**
  * Generate auth token
- * - Token type should be "ACCESS"
- * - Return token and expiry date in required format
- *
- * @param {User} user
- * @returns {Promise<Object>}
- *
  * Example response:
  * "access": {
  *          "token": "eyJhbGcipiJIUzI1NiIs...",
- *          "expires": "2024-07-24T23:51:19.036Z"
+ *          "expires": "2025-07-24T23:51:19.036Z"
  * }
  */
 const generateAuthTokens = async (user) => {

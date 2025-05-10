@@ -6,7 +6,7 @@ const User = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true, // Auto-incremented ID
+      autoIncrement: true, // Auto-increment ID
       primaryKey: true,
     },
     name: {
@@ -27,7 +27,7 @@ const User = sequelize.define(
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt fields
+    timestamps: true, // createdAt and updatedAt fields
     tableName: "users",
   }
 );

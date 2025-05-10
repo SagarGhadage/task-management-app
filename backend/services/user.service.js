@@ -6,7 +6,6 @@ const { where } = require("sequelize");
 
 /**
  * Get User by id
- * - Fetch user object from Mongo using the "_id" field and return user object
  * @param {String} id
  * @returns {Promise<User>}
  */
@@ -22,7 +21,6 @@ getUserById = async (id) => {
 
 /**
  * Get user by email
- * - Fetch user object from Mongo using the "email" field and return user object
  * @param {string} email
  * @returns {Promise<User>}
  */
@@ -39,12 +37,6 @@ getUserByEmail = async (email) => {
 };
 /**
  * Create user
- *  - check if the user with the email already exists using `User.isEmailTaken()` method
- *  - If so throw an error using the `ApiError` class. Pass two arguments to the constructor, //code,msg
- *    1. 200 OK status code using `http-status` library
- *    2. An error message, 'Email already taken'
- *  - Otherwise, create and return a new User object
- *
  * @param {Object} userBody
  * @returns {Promise<User>}
  * @throws {ApiError}

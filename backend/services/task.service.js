@@ -2,7 +2,7 @@ const { Task } = require('../models/')
 const getTaskById = async (user,taskId) => {
     try {
         const task = await Task.findOne({where:{id:taskId,userId:user.id}})
-        console.log(task)
+        // console.log(task)
         return task
     } catch (error) {
         throw error
@@ -24,10 +24,10 @@ const getTasks = async (user) => {
     }
 }
 const creteTask = async (user,task) => {
-    console.log(task,'task')
+    // console.log(task,'task')
     try {
         const tasks = await Task.create({ ...task,userId:user.id })
-        console.log(tasks)
+        // console.log(tasks)
         return tasks
     } catch (error) {
         throw error

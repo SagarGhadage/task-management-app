@@ -26,7 +26,6 @@ const updateTask={
       title:Joi.string(),
       effortToComplete:Joi.number(),
       dueDate:Joi.date().greater('now'),
-      // status:Joi.string().valid('todo','inProgress','done')
     }),
   }
 
