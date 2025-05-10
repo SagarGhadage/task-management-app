@@ -7,7 +7,7 @@ const taskRoute = require("./tasks.route");
 const router = express.Router();
 
 
-router.use("/user",(_,__,n)=>{console.log('user',n())},userRoute)
+router.use("/user",userRoute)
 router.use("/auth",authRoute)
 router.use('/task',taskRoute)
 module.exports = router;

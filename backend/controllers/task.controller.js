@@ -87,7 +87,7 @@ const exportTasks = catchAsync(async (req, res) => {
 });
 
 const importTasks = catchAsync(async (req, res) => {
-  console.log(req.file, "req.file");
+  // console.log(req.file, "req.file");
   if (!req.file) {
     throw new ApiError(httpStatus.BAD_REQUEST, "No file uploaded");
   }
@@ -96,7 +96,7 @@ const importTasks = catchAsync(async (req, res) => {
   const tasks = xlsx.utils.sheet_to_json(sheet);
 
   const userId = req.user.id;
-  console.log(req.user.id, "tasks");
+  // console.log(req.user.id, "tasks");
   const tasksStaus = await Promise.all(
     tasks.map(
       async (task) =>
@@ -109,7 +109,7 @@ const importTasks = catchAsync(async (req, res) => {
         })
     )
   );
-  console.log(tasksStaus, "tasksStaus");
+  // console.log(tasksStaus, "tasksStaus");
 
   res.status(201).json({ message: "Tasks imported" });
 });
@@ -121,7 +121,9 @@ module.exports = {
   createTask,
   updateTask,
   deleteTask,
-  exportTasks,importTasks,upload,
+  exportTasks,
+  importTasks,
+  upload,
 };
 
 exports.upload = multer({ dest: "uploads/" }).single("file");
