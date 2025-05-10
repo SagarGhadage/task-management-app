@@ -1,6 +1,7 @@
 import axios from "axios";
 const API_URL_Local = "http://localhost:8082/v1/";
-const API_URL = "https://task-management-app-7yzg.onrender.com/v1/";
+const API_URL_ONLINE = "https://task-management-app-7yzg.onrender.com/v1/";
+const API_URL = API_URL_Local;
 const headers = {
   headers: {
     "Content-Type": "application/json",

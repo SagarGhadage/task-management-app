@@ -7,7 +7,7 @@ export default function ProtectedRoute({ children }) {
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null;
-  console.log(user);
+  // console.log(user);
 
   return user?.email ? <>{children}</> : <Navigate to="/login" />; 
 }

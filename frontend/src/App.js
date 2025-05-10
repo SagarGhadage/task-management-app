@@ -13,6 +13,7 @@ import Login from "./pages/auth/login/Login.jsx";
 import TasksUpload from "./components/tasks/TasksUpload.jsx";
 import TaskExport from "./components/tasks/TaskExport.jsx";
 import TaskCard from "./components/tasks/TaskCard.jsx";
+import Home from '../src/pages/home/Home.jsx'
 function App() {
   const isAuthenticated = !!localStorage.getItem("token");
 
@@ -22,7 +23,7 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" element={<TasksList/>} />
+            <Route path="/" element={<Home />} />
 
             <Route
               path="/tasks"

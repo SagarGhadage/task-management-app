@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getTaskById } from "../../api/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { deleteTask, getTaskById } from "../../api/api";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 
-export default function TaskCard({ taskDetails, onDelete }) {
+export default function TaskCard({ taskDetails }) {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  // const { onView, onEdit, handleDelete } = useOutletContext();
+  const {handleDelete,onEdit} = useOutletContext();
 
   const [task, setTask] = useState({
     id: taskDetails?.id || "",
@@ -34,7 +36,10 @@ export default function TaskCard({ taskDetails, onDelete }) {
   }, []);
 
   return (
-    <div className="bg-white w-[90%] m-auto dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 duration-300" onClick={()=>navigate(`/tasks/${task?.id}`)}>
+    <div
+      className="bg-white w-[90%] m-auto dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 duration-300"
+      onClick={() => navigate(`/tasks/${task?.id}`)}
+    >
       <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
         Task: {task?.title}
       </h3>
@@ -52,11 +57,7 @@ export default function TaskCard({ taskDetails, onDelete }) {
       <div className="flex justify-end space-x-3">
         <button
           id={task?.id}
-          onClick={() => {
-            console.log(task?.id, "Edit");
-            navigate(`/tasks/update/${task?.id}`);
-            enqueueSnackbar("Navigating to edit task", { variant: "info" });
-          }}
+          onClick={(e) => {e.stopPropagation();onEdit(task?.id);}}
           className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
         >
           Edit
@@ -64,10 +65,7 @@ export default function TaskCard({ taskDetails, onDelete }) {
         <button
           id={task?.id}
           onClick={() => {
-            onDelete(task?.id);
-            enqueueSnackbar("Task deleted successfully", {
-              variant: "success",
-            });
+            handleDelete(task?.id);
           }}
           className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
         >

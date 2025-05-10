@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
-// import { useAuth } from "../../context/AuthContex.jsx";
 import { useNavigate, Link } from "react-router-dom";
 import { LightMode, DarkMode, AccountCircle } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContex.jsx";
@@ -26,25 +25,19 @@ export default function Navbar() {
       <div className="flex items-center gap-6">
         <Link
           to="/tasks"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
         >
           View Tasks
         </Link>
         <Link
           to="/tasks/import"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
         >
           Import Tasks
         </Link>
-        {/* <Link
-          to="/tasks/export"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
-        >
-          Export Tasks
-        </Link> */}
         <Link
           to="/tasks/create"
-          className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
+          className="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
         >
           Create Task
         </Link>

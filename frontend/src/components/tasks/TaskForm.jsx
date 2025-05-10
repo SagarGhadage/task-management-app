@@ -3,6 +3,7 @@ import { createTask, getTaskById, updateTask } from "../../api/api";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import pick from "../../utils/pick";
 import { useSnackbar } from 'notistack';
+import TasksUpload from "./TasksUpload";
 
 const TaskForm = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -31,6 +32,7 @@ const TaskForm = () => {
       };
       getTaskToEdit(taskId);
     }
+    // return ()=>setIsEdit(false)
   }, [isEdit, taskId]);
 
   const handleChange = (e) => {
@@ -108,6 +110,10 @@ const TaskForm = () => {
       >
         {isEdit ? "Update Task" : "Create Task"}
       </button>
+      {!isEdit&&<h2 className="text-xl center font-semibold text-gray-700 dark:text-gray-200 mb-4">
+        Or Upload Bulk Task
+      </h2>}
+      {!isEdit&&<TasksUpload />}
     </form>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { importTasks } from '../../api/api';
-import { useSnackbar } from 'notistack';
+import React, { useState } from "react";
+import { importTasks } from "../../api/api";
+import { useSnackbar } from "notistack";
 
 const TasksUpload = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -9,7 +9,7 @@ const TasksUpload = () => {
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
   };
 
   const handleDrop = (event) => {
@@ -21,47 +21,57 @@ const TasksUpload = () => {
 
   const handleDragOver = (event) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'copy'; // Show a copy cursor
+    event.dataTransfer.dropEffect = "copy"; //show copy txt
   };
 
   const handleUpload = async () => {
     if (!file) {
-      enqueueSnackbar('Please select a file first.', { variant: 'warning' });
+      enqueueSnackbar("Please select a file first.", { variant: "warning" });
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
       const response = await importTasks(formData);
 
       if (response?.status === 201) {
-        enqueueSnackbar('File uploaded successfully!', { variant: 'success' });
-        setFile(null)
+        enqueueSnackbar("File uploaded successfully!", { variant: "success" });
+        setFile(null);
       } else if (response?.data?.error) {
-        enqueueSnackbar(`Error uploading file: ${response?.data?.error}`, { variant: 'error' });
+        enqueueSnackbar(`Error uploading file: ${response?.data?.error}`, {
+          variant: "error",
+        });
       } else {
-        enqueueSnackbar('Failed to upload file.', { variant: 'error' });
+        enqueueSnackbar("Failed to upload file.", { variant: "error" });
       }
     } catch (error) {
-      console.error('Error uploading file:', error);
-      enqueueSnackbar('An error occurred while uploading the file.', { variant: 'error' });
+      // console.error('Error uploading file:', error);
+      enqueueSnackbar("An error occurred while uploading the file.", {
+        variant: "error",
+      });
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Upload CSV or Excel File</h2>
+      <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
+        Upload CSV or Excel File
+      </h2>
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         className="w-full h-32 flex items-center justify-center border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 mb-4 cursor-pointer hover:border-gray-600 dark:hover:border-gray-500"
       >
         {file ? (
-          <span className="text-gray-600 dark:text-gray-300">Selected File: {file.name}</span>
+          <span className="text-gray-600 dark:text-gray-300">
+            Selected File: {file.name}
+          </span>
         ) : (
-          <span className="text-gray-500 dark:text-gray-400">Drag and drop your file here or click to select</span>
+          <span className="text-gray-500 dark:text-gray-400">
+            Drag and drop your file here or click to select
+          </span>
         )}
       </div>
       <input

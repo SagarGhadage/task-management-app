@@ -3,16 +3,15 @@ import { useOutletContext } from "react-router-dom";
 import { exportTasks } from "../../api/api";
 // import { exportTasks } from '../../api/api'
 
-export default function TaskExport({user}) {
-
+export default function TaskExport({ user }) {
   const handleExport = async () => {
     try {
-      console.log("Exporting tasks...");
+      // console.log("Exporting tasks...");
       const response = await exportTasks(user);
       if (!response?.size) {
         throw new Error("Failed to export tasks");
       }
-      console.log(response?.size, "response");
+      console.log(response?.size, ": buffer size");
       const blob = new Blob([response], {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });

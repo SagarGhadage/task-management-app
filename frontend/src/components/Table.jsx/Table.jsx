@@ -56,11 +56,11 @@ const Table = ({ headers, rows, onEdit, onDelete, onView }) => {
                 {row?.dueDate}
               </td>
 
-              <td className="flex justify-around gap-1 px-4 py-2 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600">
+              <td className="flex content-center justify-around h-full gap-1  py-[10%] text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600">
                 <button
                   id={row?.id}
                   onClick={() => onView(row?.id)}
-                  className="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
+                  className="px-3 my-[auto] py-1 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
                 >
                   View
                 </button>
