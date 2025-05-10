@@ -43,7 +43,7 @@ export default function Register() {
         }
       } catch (err) {
         if (err.response && err.response.data) {
-          enqueueSnackbar(err?.response?.data?.message||'error', { variant: "error" });
+          enqueueSnackbar(err?.response?.data?.message||'Backend error', { variant: "error" });
         } else {
           enqueueSnackbar(
             "Something went wrong. Check that the backend is running, reachable and returns valid JSON.",
