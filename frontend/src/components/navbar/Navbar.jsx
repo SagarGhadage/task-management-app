@@ -17,7 +17,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-gray-100 dark:bg-gray-800 shadow-md">
+    <nav className="flex items-center justify-between mb-2 px-6 py-4 bg-gray-100 dark:bg-gray-800 shadow-lg shadow-gray-500/50 ">
         <Link to='/' className="text-2xl font-bold text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors duration-300">
           Task Manager
         </Link>
