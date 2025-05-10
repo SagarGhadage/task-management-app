@@ -49,8 +49,10 @@ const updateTask = catchAsync(async (req, res) => {
       `${req.params.taskId} is Not found for user ${req.user.email}`
     );
   }
+  
   res.status(httpStatus.OK).send(task); // here we can use NO_Content also 204
 });
+
 const deleteTask = catchAsync(async (req, res) => {
   const info = await taskService.deleteTaskById(req.user, req.params.taskId);
   if (info) {

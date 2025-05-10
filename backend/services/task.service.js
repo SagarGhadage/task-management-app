@@ -39,15 +39,18 @@ const updateTaskById = async (user,taskId, task) => {
         if (!taskToUpdate) {
             return null
         }
-        const { title, description, status } = task
-        if (status) {
-            taskToUpdate.status = status
+        const { title, description, dueDate ,effortToComplete} = task
+        if (dueDate) {
+            taskToUpdate.dueDate = dueDate
         }
         if (title) {
             taskToUpdate.title = title
         }
         if (description) {
             taskToUpdate.description = description
+        }
+        if (task.effortToComplete) {
+            taskToUpdate.effortToComplete = task.effortToComplete
         }
         await taskToUpdate.save()
         return taskToUpdate
