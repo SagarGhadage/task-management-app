@@ -121,9 +121,7 @@ module.exports = {
   createTask,
   updateTask,
   deleteTask,
-  exportTasks,
-  importTasks,
-  upload,
+  exportTasks,importTasks,upload,
 };
 
 exports.upload = multer({ dest: "uploads/" }).single("file");
