@@ -50,7 +50,7 @@ const navigate = useNavigate();
       }
     } catch (error) {
       // console.error('Error uploading file:', error);
-      enqueueSnackbar("An error occurred while uploading the file.", {
+      enqueueSnackbar("An error occurred while uploading the file." +error?.response?.data?.message, {
         variant: "error",
       });
     }

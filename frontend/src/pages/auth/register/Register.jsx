@@ -40,6 +40,7 @@ export default function Register() {
           localStorage.setItem("user", JSON.stringify(data?.user));
           setUser(data?.user);
           navigate("/tasks");
+          window.location.reload();
         }
       } catch (err) {
         if (err.response && err.response.data) {

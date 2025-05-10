@@ -39,7 +39,7 @@ const Task = () => {
       navigate("/tasks");
     } catch (error) {
       console.error("Error deleting task:", error);
-      enqueueSnackbar("Failed to delete task.", { variant: "error" });
+      enqueueSnackbar("Failed to delete task."+error?.response?.data?.message, { variant: "error" });
     }
   };
   const onView = async (taskId) => {

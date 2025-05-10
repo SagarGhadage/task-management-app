@@ -33,6 +33,7 @@ export default function Login() {
       login();
       enqueueSnackbar("Login successful!", { variant: "success" });
       navigate("/tasks/create");
+      window.location.reload();
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Login failed. Please check your credentials.", {
