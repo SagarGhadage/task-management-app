@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginApi } from "../../../api/api";
 import { useAuth } from "../../../context/AuthContex";
+import { useSnackbar } from 'notistack';
 
 export default function Login() {
-  const {user,login}=useAuth()
+  const { login } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
   const [loginForm, setLoginForm] = useState({
     username: "",
     password: "",
@@ -28,10 +30,12 @@ export default function Login() {
       });
       localStorage.setItem("token", result?.tokens?.access?.token);
       localStorage.setItem("user", JSON.stringify(result?.user));
-      login()
+      login();
+      enqueueSnackbar('Login successful!', { variant: 'success' });
       navigate("/tasks/create");
     } catch (e) {
       console.error(e);
+      enqueueSnackbar('Login failed. Please check your credentials.', { variant: 'error' });
     } finally {
       setLoading(false);
     }
