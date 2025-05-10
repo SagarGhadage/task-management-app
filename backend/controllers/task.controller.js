@@ -6,6 +6,7 @@ const multer = require("multer");
 const xlsx = require("xlsx");
 const Task = require("../models/task.model");
 const pick = require("../utils/pick");
+const { excelDateToJSDate } = require("../utils/excelDateToJs");
 
 const getTaskById = catchAsync(async (req, res) => {
   const task = await taskService.getTaskById(req.user, req.params.taskId);
@@ -88,6 +89,7 @@ const exportTasks = catchAsync(async (req, res) => {
 
 const importTasks = catchAsync(async (req, res) => {
   // console.log(req.file, "req.file");
+
   if (!req.file) {
     throw new ApiError(httpStatus.BAD_REQUEST, "No file uploaded");
   }
@@ -104,7 +106,7 @@ const importTasks = catchAsync(async (req, res) => {
           title: task?.title,
           description: task?.description,
           effortToComplete: task?.effortToComplete,
-          dueDate: task?.dueDate,
+          dueDate: excelDateToJSDate(task?.dueDate),
           UserId: task?.userId || userId,
         })
     )
