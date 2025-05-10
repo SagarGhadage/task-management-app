@@ -96,8 +96,7 @@ git clone https://github.com/SagarGhadage/task-management-app.git
 - `backend/`: Contains the backend code, including routes, controllers, models, and services.
 - `frontend/`: Contains the frontend code, including React components, pages, and styles.
 
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request.
+## SQL 
+```sql
 
-## License
-This project is licensed under the MIT License.
+```
