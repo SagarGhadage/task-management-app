@@ -23,7 +23,7 @@ export default function Navbar() {
         </Link>
 
         {/* Navigation Links */}
-      <div className="flex items-center gap-6">
+      {user?.email&&<div className="flex items-center gap-6">
         <Link
           to="/tasks"
           className="text-gray-800 dark:text-gray-100 hover:text-blue-500"
@@ -48,7 +48,7 @@ export default function Navbar() {
         >
           Create Task
         </Link>
-      </div>
+      </div>}
       <div className="flex items-center gap-6">
         {!user?.email ? (
           <div className="flex gap-4">

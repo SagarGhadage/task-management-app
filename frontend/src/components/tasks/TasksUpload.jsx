@@ -6,7 +6,6 @@ const TasksUpload = () => {
   const { enqueueSnackbar } = useSnackbar();
 const navigate = useNavigate();
   const [file, setFile] = useState(null);
-
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
     // console.log(event.target.files[0]);
@@ -39,8 +38,9 @@ const navigate = useNavigate();
       if (response?.status === 201) {
         enqueueSnackbar("File uploaded successfully!", { variant: "success" });
         setFile(null);
-        navigate("/");
+        // navigate("/");
         navigate("/tasks");
+        window.location.reload();
       } else if (response?.data?.error) {
         enqueueSnackbar(`Error uploading file: ${response?.data?.error}`, {
           variant: "error",

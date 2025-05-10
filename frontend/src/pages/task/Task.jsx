@@ -7,7 +7,7 @@ const Task = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { taskId } = useParams(); // Extract the parameter from the URL
   const navigate = useNavigate();
-
+  
   const [isEdit, setIsEdit] = React.useState(false);
   const [tasks, setTasks] = React.useState([]);
 

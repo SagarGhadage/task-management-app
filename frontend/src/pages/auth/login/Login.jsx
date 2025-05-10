@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginApi } from "../../../api/api";
 import { useAuth } from "../../../context/AuthContex";
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
 
 export default function Login() {
   const { login } = useAuth();
@@ -31,20 +31,24 @@ export default function Login() {
       localStorage.setItem("token", result?.tokens?.access?.token);
       localStorage.setItem("user", JSON.stringify(result?.user));
       login();
-      enqueueSnackbar('Login successful!', { variant: 'success' });
+      enqueueSnackbar("Login successful!", { variant: "success" });
       navigate("/tasks/create");
     } catch (e) {
       console.error(e);
-      enqueueSnackbar('Login failed. Please check your credentials.', { variant: 'error' });
+      enqueueSnackbar("Login failed. Please check your credentials.", {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex mt-1 items-center justify-center min-h-[90vh] bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">Login</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">
+          Login
+        </h2>
         <div className="mb-4">
           <label
             htmlFor="username"
@@ -80,14 +84,22 @@ export default function Login() {
         <button
           onClick={handleLogin}
           disabled={loading}
-          className={`w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           {loading ? "Logging in..." : "Login"}
         </button>
-      <p className="mt-4 text-sm text-center text-gray-600 dark:text-gray-400">
-          Dont't have an account? <Link to="/Register" className="text-blue-600 hover:underline dark:text-blue-400">Register here</Link>
+        <p className="mt-4 text-sm text-center text-gray-600 dark:text-gray-400">
+          Dont't have an account?{" "}
+          <Link
+            to="/Register"
+            className="text-blue-600 hover:underline dark:text-blue-400"
+          >
+            Register here
+          </Link>
         </p>
       </div>
-    </div>
+      </div>
   );
 }
