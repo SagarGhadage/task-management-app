@@ -6,16 +6,18 @@ const getTask = {
     }),
   };
 
-  const createTask={
-    body:Joi.object().keys({
-      description:Joi.string(),
-      title:Joi.string().required(),
-      dueDate:Joi.date().greater('now').required(),
-      effortToComplete:Joi.number(),
+const createTask = {
+  body: Joi.object().keys({
+    title: Joi.string().required(),
+    description: Joi.string().optional(),
+    effort: Joi.number().integer().min(1).required(),
+    dueDate: Joi.date().greater('now').required().messages({
+      'date.greater': 'Due date must be a future date.',
     }),
-  }
+  }),
+};
 
-  const updateTask={
+const updateTask={
     params: Joi.object().keys({
       taskId:Joi.number(),
     }),
@@ -28,12 +30,12 @@ const getTask = {
     }),
   }
 
-  const deleteTask = {
+const deleteTask = {
     params: Joi.object().keys({
       taskId:Joi.number(),
     }),
   };
 
-  module.exports={
-    getTask,deleteTask,createTask,updateTask
-  }
+module.exports = {
+  getTask,deleteTask,createTask,updateTask
+}

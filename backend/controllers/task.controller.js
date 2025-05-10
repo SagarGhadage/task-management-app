@@ -5,6 +5,7 @@ const httpStatus = require("http-status");
 const multer = require("multer");
 const xlsx = require("xlsx");
 const Task = require("../models/task.model");
+const pick = require("../utils/pick");
 
 const getTaskById = catchAsync(async (req, res) => {
   const task = await taskService.getTaskById(req.user, req.params.taskId);
@@ -19,7 +20,7 @@ const getTaskById = catchAsync(async (req, res) => {
 });
 
 const getTasks = catchAsync(async (req, res) => {
-  console.log("getTasks", req.user);
+  // console.log("getTasks", req.user);
   const tasks = await taskService.getTasks(req.user);
   res.status(httpStatus.OK).send(tasks);
 });
@@ -64,11 +65,21 @@ const exportTasks = catchAsync(async (req, res) => {
       `Tasks not found for user ${req.user.email}`
     );
   }
-  console.log(tasks.tasks, "tasks");
+  // console.log(tasks.tasks, "tasks");
   const data = tasks?.tasks?.map((t) => t.toJSON());
-  const worksheet = xlsx.utils.json_to_sheet(data);
+  const tasksToExport = data?.map((task) => {
+    return {
+      title: task?.title,
+      description: task?.description,
+      effortToComplete: task?.effortToComplete,
+      dueDate: task?.dueDate,
+    };
+  });
+  // console.table(tasksToExport);
+  // console.log(data);
+  const worksheet = xlsx.utils.json_to_sheet(tasksToExport);
   const wb = xlsx.utils.book_new();
-  xlsx.utils.book_append_sheet(wb, worksheet, "Tasks");
+  xlsx.utils.book_append_sheet(wb, worksheet, `${req?.user?.name}'s Tasks`);
   const buffer = xlsx.write(wb, { type: "buffer", bookType: "xlsx" });
   console.log("Buffer size:", buffer.length);
   res.setHeader("Content-Disposition", 'attachment; filename="tasks.xlsx"');
@@ -89,7 +100,7 @@ const importTasks = catchAsync(async (req, res) => {
   const tasksStaus = await Promise.all(
     tasks.map(
       async (task) =>
-        await taskService.creteTask(req.user,{
+        await taskService.creteTask(req.user, {
           title: task?.title,
           description: task?.description,
           effortToComplete: task?.effortToComplete,
