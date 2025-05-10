@@ -10,7 +10,7 @@ const createTask = {
   body: Joi.object().keys({
     title: Joi.string().required(),
     description: Joi.string().optional(),
-    effort: Joi.number().integer().min(1).required(),
+    effortToComplete: Joi.number().integer().min(1).required(),
     dueDate: Joi.date().greater('now').required().messages({
       'date.greater': 'Due date must be a future date.',
     }),
