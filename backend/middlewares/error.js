@@ -18,8 +18,8 @@ const errorHandler = (err, req, res, next) => {
     if (config.env === "development") {
         console.error(err);
     }
-
-    res.status(statusCode).send(response);
+    console.log(statusCode ||400,'status')
+    res.status(statusCode||500).send(response);
 };
 
 module.exports = {
