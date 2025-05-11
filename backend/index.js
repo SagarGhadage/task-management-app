@@ -1,7 +1,7 @@
 require("dotenv").config();
 const app = require("./app");
 const config = require("./config/config");
-const sequelize = require("./config/database");
+const {sequelize} = require("./config/database");
 const PORT=config.port || 3000;
 
 // Sync database and start server
