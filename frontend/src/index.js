@@ -12,7 +12,7 @@ root.render(
       maxSnack={3}
       autoHideDuration={2000}
       anchorOrigin={{
-        vertical: "bottom",
+        vertical: "top",
         horizontal: "center",
       }}
       sx={{
