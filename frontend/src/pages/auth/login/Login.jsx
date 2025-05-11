@@ -24,6 +24,14 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       setLoading(true);
+      if(loginForm?.username?.length<2){
+        enqueueSnackbar('Name shud be at least 2 characters',{variant:'error'})
+        return
+      }
+      if(loginForm?.password?.length<6){
+        enqueueSnackbar('Password shud be at least 6 characters',{variant:'error'})
+        return
+      }
       const result = await loginApi({
         email: loginForm.username,
         password: loginForm.password,
@@ -46,7 +54,7 @@ export default function Login() {
 
   return (
     <div className="flex mt-1 items-center justify-center min-h-[90vh] bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <form className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <h2 className="mb-6 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">
           Login
         </h2>
@@ -61,10 +69,10 @@ export default function Login() {
             type="text"
             id="username"
             name="username"
-            required
             value={loginForm.username}
             onChange={handleChange}
             className="w-full px-3 py-2 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
         <div className="mb-6">
@@ -78,10 +86,10 @@ export default function Login() {
             type="password"
             id="password"
             name="password"
-            required
             value={loginForm.password}
             onChange={handleChange}
             className="w-full px-3 py-2 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
         <button
@@ -102,7 +110,7 @@ export default function Login() {
             Register here
           </Link>
         </p>
-      </div>
+      </form>
       </div>
   );
 }
