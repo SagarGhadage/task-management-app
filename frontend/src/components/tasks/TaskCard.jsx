@@ -37,8 +37,8 @@ export default function TaskCard({ taskDetails }) {
 
   return (
     <div
-      className="bg-white w-[90%] m-auto dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 duration-300"
-      onClick={() => navigate(`/tasks/${task?.id}`)}
+      className={`bg-white w-[90%] m-auto dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-transform transform ${!taskId?"hover:scale-105":""} duration-300`}
+      onClick={() =>{if(!taskId){ navigate(`/tasks/${task?.id}`)}}}
     >
       <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
         Task: {task?.title}

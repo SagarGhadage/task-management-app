@@ -1,5 +1,8 @@
 {
-  "name": "frontend",
+  "name": "Task Management App frontend",
+  "author": {
+    "name": "sagar"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -5,5 +5,5 @@ export default function Home() {
   useEffect(() => {
     navigation("/tasks");
   }, []);
-  return <div>Home</div>;
+  return <div>Not implemented</div>;
 }

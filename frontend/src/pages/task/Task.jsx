@@ -11,10 +11,11 @@ const Task = () => {
   const [isEdit, setIsEdit] = React.useState(false);
   const [tasks, setTasks] = React.useState([]);
 
-  // console.log(taskId, "taskId", taskData, "taskData");
   React.useEffect(() => {
-    if (taskId) {
+    if (window.location.pathname.includes('update')) {
       setIsEdit(true);
+    } else {
+      setIsEdit(false);
     }
   }, [taskId]);
 
@@ -30,7 +31,7 @@ const Task = () => {
   };
 
   useEffect(() => {
-    fetchTasks();
+    // fetchTasks();
   }, []);
 
   const handleDelete = async (taskId) => {
@@ -53,11 +54,13 @@ const Task = () => {
   };
   const onEdit = async (taskId) => {
     navigate(`/tasks/update/${taskId}`);
-    await fetchTasks();
+    setIsEdit(true);
+    // await fetchTasks();
   };
-// console.log(width, "width");
+  // console.log(width, "width");
+  
   return (
-    <div className="task-container mt-4 p-6">
+    <div style={{scrollbarWidth:'none'}} className=" flex  flex-col w-full h-screen overflow-scroll p-6 bg-gray-100 dark:bg-gray-900 scrollbar-none">
       <Outlet
         context={{
           width,

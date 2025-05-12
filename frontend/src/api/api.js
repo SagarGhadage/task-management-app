@@ -105,9 +105,9 @@ export async function deleteTask(id) {
     throw error;
   }
 }
-export async function exportTasks() {
+export async function exportTasks(fileType) {
   try {
-    const response = await axios.get(`${API_URL}task/export`, {
+    const response = await axios.get(`${API_URL}task/export?${fileType==='csv'?'format=csv':''}`, {
       ...fileDownloadHeaders,
       responseType: "blob",
     });

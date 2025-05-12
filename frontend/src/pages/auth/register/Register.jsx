@@ -4,10 +4,12 @@ import { useSnackbar } from "notistack";
 import pick from "../../../utils/pick";
 import { registerApi } from "../../../api/api.js";
 import { useAuth } from "../../../context/AuthContex.jsx";
+import useWindowSize from "../../../utils/useWindowSize.jsx";
 
 export default function Register() {
   const navigate = useNavigate();
-  const {user,setUser} = useAuth()
+  const { user, setUser } = useAuth();
+  const winSize = useWindowSize();
   const { enqueueSnackbar } = useSnackbar();
 
   const [registerForm, setRegisterForm] = useState({
@@ -44,7 +46,9 @@ export default function Register() {
         }
       } catch (err) {
         if (err.response && err.response.data) {
-          enqueueSnackbar(err?.response?.data?.message||'Backend error', { variant: "error" });
+          enqueueSnackbar(err?.response?.data?.message || "Backend error", {
+            variant: "error",
+          });
         } else {
           enqueueSnackbar(
             "Something went wrong. Check that the backend is running, reachable and returns valid JSON.",
@@ -71,7 +75,9 @@ export default function Register() {
       return false;
     }
     if (data.password.length < 6) {
-      enqueueSnackbar("Password must be at least 6 characters", { variant: "warning" });
+      enqueueSnackbar("Password must be at least 6 characters", {
+        variant: "warning",
+      });
       return false;
     }
     if (data.password !== data.confirmPassword) {
@@ -81,12 +87,16 @@ export default function Register() {
     return true;
   };
 
-  
-
   return (
-    <div className="flex mt-1 items-center justify-center min-h-[95vh] bg-gray-100 dark:bg-gray-900">
+    <div
+      className={`flex mt-1 p-4 ${
+        winSize.width < 768 ? "items-start" : "items-center"
+      } justify-center min-h-[88vh] bg-gray-100 dark:bg-gray-900`}
+    >
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">Register</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">
+          Register
+        </h2>
         <form className="space-y-4">
           <div>
             <label
@@ -160,13 +170,21 @@ export default function Register() {
             type="button"
             onClick={() => register(registerForm)}
             disabled={loading}
-            className={`w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
         <p className="mt-4 text-sm text-center text-gray-600 dark:text-gray-400">
-          Already have an account? <Link to="/login" className="text-blue-600 hover:underline dark:text-blue-400">Login here</Link>
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-blue-600 hover:underline dark:text-blue-400"
+          >
+            Login here
+          </Link>
         </p>
       </div>
     </div>

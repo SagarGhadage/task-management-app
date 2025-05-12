@@ -37,9 +37,9 @@ This Task Management Application is a full-stack web application designed to hel
 
 ### Backend
 
-- **Node.js** with Express.js
+- **Node.js** with `Express.js`
 - **PostgreSQL** for the database
-- Libraries: `xlsx`, `sequelize`, `passport.js`, `jsonwebtoken`
+- Libraries: `xlsx`, `sequelize`, `passport.js`, `jsonwebtoken`, `sqlite3`,
 
 ### Frontend
 

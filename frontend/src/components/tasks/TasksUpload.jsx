@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { importTasks } from "../../api/api";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 const TasksUpload = () => {
   const { enqueueSnackbar } = useSnackbar();
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  // const { fetchTasks } = useOutletContext();
   const [file, setFile] = useState(null);
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -37,10 +38,9 @@ const navigate = useNavigate();
 
       if (response?.status === 201) {
         enqueueSnackbar("File uploaded successfully!", { variant: "success" });
+        // fetchTasks();
         setFile(null);
-        // navigate("/");
         navigate("/tasks");
-        window.location.reload();
       } else if (response?.data?.error) {
         enqueueSnackbar(`Error uploading file: ${response?.data?.error}`, {
           variant: "error",
@@ -50,9 +50,13 @@ const navigate = useNavigate();
       }
     } catch (error) {
       // console.error('Error uploading file:', error);
-      enqueueSnackbar("An error occurred while uploading the file." +error?.response?.data?.message, {
-        variant: "error",
-      });
+      enqueueSnackbar(
+        "An error occurred while uploading the file." +
+          error?.response?.data?.message,
+        {
+          variant: "error",
+        }
+      );
     }
   };
 

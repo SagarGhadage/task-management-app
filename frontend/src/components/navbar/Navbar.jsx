@@ -9,6 +9,7 @@ import {
   Close as CloseIcon,
 } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContex.jsx";
+import TaskExport from "../tasks/TaskExport.jsx";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -21,7 +22,7 @@ export default function Navbar() {
     navigate("/login");
   };
   return (
-    <nav className="flex justify-between px-6 py-4 bg-gray-100 shadow dark:bg-gray-800">
+    <nav className="flex relative z-100 justify-between px-6 py-4 bg-gray-100 shadow dark:bg-gray-800">
       <Link
         to="/"
         className="text-2xl font-bold text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors duration-300 dark:hover:text-[#ffb600]"
@@ -44,6 +45,11 @@ export default function Navbar() {
             className="text-gray-800 hidden md:flex text-xl dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]"
           >
             Import Tasks
+          </Link>
+        )}
+        {user?.id && (
+          <Link className="text-gray-800 hidden md:flex text-xl dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]">
+            <TaskExport link />
           </Link>
         )}
         {user?.email && (
@@ -135,6 +141,18 @@ export default function Navbar() {
                 className="text-gray-800 text-xl w-full text-center dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]"
               >
                 Import Tasks
+              </Link>
+              <Link
+                to="/tasks/import"
+                className="text-gray-800 text-xl w-full text-center dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]"
+              >
+                <TaskExport link />
+              </Link>
+              <Link
+                to="/tasks/import"
+                className="text-gray-800 text-xl w-full text-center dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]"
+              >
+                <TaskExport fileType={'csv'} link/>
               </Link>
               <Link
                 to="/tasks/create"
