@@ -89,24 +89,25 @@ const exportTasks = catchAsync(async (req, res) => {
     );
   }
 
-  // const format = req.query.format || "xlsx";
+  const format = req.query.format || "xlsx";
 
-  // if (format === "csv") {
-  //   const csv = parse(tasksToExport);
-  //   res.setHeader("Content-Disposition", 'attachment; filename="tasks.csv"');
-  //   res.setHeader("Content-Type", "text/csv; charset=utf-8");
-  //   res.status(200).send(csv);
-  // } else {
-  const worksheet = xlsx.utils.json_to_sheet(tasksToExport);
-  const wb = xlsx.utils.book_new();
-  xlsx.utils.book_append_sheet(wb, worksheet, `${req?.user?.name}'s Tasks`);
-  const buffer = xlsx.write(wb, { type: "buffer", bookType: "xlsx" });
-  res.setHeader("Content-Disposition", 'attachment; filename="tasks.xlsx"');
-  res.setHeader(
-    "Content-Type",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-  );
-  res.status(200).send(buffer);
+  if (format === "csv") {
+    const csv = parse(tasksToExport);
+    res.setHeader("Content-Disposition", 'attachment; filename="tasks.csv"');
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.status(200).send(csv);
+  } else {
+    const worksheet = xlsx.utils.json_to_sheet(tasksToExport);
+    const wb = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, worksheet, `${req?.user?.name}'s Tasks`);
+    const buffer = xlsx.write(wb, { type: "buffer", bookType: "xlsx" });
+    res.setHeader("Content-Disposition", 'attachment; filename="tasks.xlsx"');
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.status(200).send(buffer);
+  }
 });
 
 const importTasks = catchAsync(async (req, res) => {
@@ -114,11 +115,11 @@ const importTasks = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "No file uploaded");
   }
 
-  const filedetails = req.file?.originalname?.split('.')
-  const format=filedetails[filedetails.length-1]
+  const filedetails = req.file?.originalname?.split(".");
+  const format = filedetails[filedetails.length - 1];
 
   let tasks;
-  console.log(format)
+  console.log(format);
 
   if (format === "csv") {
     tasks = [];
