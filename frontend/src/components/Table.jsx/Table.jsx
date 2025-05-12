@@ -6,7 +6,7 @@ const Table = ({ headers, rows, onEdit, onDelete, onView }) => {
           <tr>
             {headers.map((header, index) => (
               <th
-                key={index}
+                key={header}
                 className="px-4 py-2 text-left text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600"
               >
                 {header}
@@ -20,7 +20,7 @@ const Table = ({ headers, rows, onEdit, onDelete, onView }) => {
         <tbody>
           {rows.map((row, index) => (
             <tr
-              key={index}
+              key={row?.id}
               className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700"
             >
               {/* {Object.values(row).map((value, idx) => (
