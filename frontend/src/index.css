@@ -31,17 +31,11 @@ code {
 body.light {
   --background-color: #ffffff;
   --text-color: #000000;
-  --navbar-background: var(--navbar-background-light);
-  --button-background: var(--button-background-light);
-  --button-text-color: var(--button-text-color-light);
 }
 
 body.dark {
   --background-color: #121212;
   --text-color: #ffffff;
-  --navbar-background: var(--navbar-background-dark);
-  --button-background: var(--button-background-dark);
-  --button-text-color: var(--button-text-color-dark);
 }
 
 body {

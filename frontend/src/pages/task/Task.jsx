@@ -23,7 +23,7 @@ const Task = () => {
     try {
       const response = await getAllTasks();
       setTasks(response?.tasks || []);
-      enqueueSnackbar("Tasks fetched successfully!", { variant: "success" });
+      console.log("Tasks fetched successfully!",);
     } catch (error) {
       console.error("Error fetching tasks:", error);
       enqueueSnackbar("Failed to fetch tasks.", { variant: "error" });
