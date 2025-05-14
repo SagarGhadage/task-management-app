@@ -24,7 +24,7 @@ const TasksUpload = () => {
   };
 
   const handleUpload = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!file) {
       enqueueSnackbar("Please select a file first.", { variant: "warning" });
       return;
@@ -51,7 +51,7 @@ const TasksUpload = () => {
       // console.error('Error uploading file:', error);
       enqueueSnackbar(
         "An error occurred while uploading the file." +
-          error?.response?.data?.message,
+          error?.response?.data?.message || "Network Error",
         {
           variant: "error",
         }
@@ -70,20 +70,19 @@ const TasksUpload = () => {
         className="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 mb-4 cursor-pointer hover:border-gray-600 dark:hover:border-gray-500"
       >
         <input
-        type="file"
-        accept=".csv, .xlsx, .xls"
-        onChange={handleFileChange}
-        className="hidden"
-        id="fileInput"
-      />
-      <label
-        htmlFor="fileInput"
-        className="px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
-      >
-        {file?'Select other':"Chose file"}
-      </label>
+          type="file"
+          accept=".csv, .xlsx, .xls"
+          onChange={handleFileChange}
+          className="hidden"
+          id="fileInput"
+        />
+        <label
+          htmlFor="fileInput"
+          className="px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
+        >
+          {file ? "Select other" : "Chose file"}
+        </label>
         {file ? (
-          
           <span className="text-gray-600 dark:text-gray-300">
             Selected File: {file.name}
           </span>
@@ -93,9 +92,9 @@ const TasksUpload = () => {
           </span>
         )}
       </div>
-      
+
       <button
-      type='submit'
+        type="submit"
         onClick={handleUpload}
         className="mt-4 px-6 py-2 bg-green-500 dark:bg-green-600 text-white rounded-lg hover:bg-green-600 dark:hover:bg-green-700"
       >

@@ -17,9 +17,9 @@ const TaskForm = () => {
     dueDate: "",
   });
 
-  console.log(taskId, "taskId");
-  console.log(isEdit, "isEdit");
-  console.log(formData);
+  // console.log(taskId, "taskId");
+  // console.log(isEdit, "isEdit");
+  // console.log(formData);
   useEffect(() => {
     if (isEdit && taskId) {
       // to get latest data instead to get real data

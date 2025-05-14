@@ -51,7 +51,7 @@ export default function Login() {
       // window.location.reload();
     } catch (e) {
       console.error(e);
-      enqueueSnackbar("Login failed. Please check your credentials.", {
+      enqueueSnackbar(`Login Failed: ${e.response?e?.response?.data?.message:e?.message}`, {
         variant: "error",
       });
     } finally {

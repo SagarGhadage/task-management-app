@@ -2,29 +2,36 @@ import axios from "axios";
 const API_URL_Local = "http://localhost:8082/v1/";
 const API_URL_ONLINE = "https://task-management-app-7yzg.onrender.com/v1/";
 const API_URL = API_URL_ONLINE;
-const headers = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
+const generateHeader = (type) => {
+  const header = {
+    headers: {
+      "Content-Type": `${
+        type == "upload"
+          ? "multipart/form-data"
+          : type == "download"
+          ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          : "application/json"
+      }`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  if (type == "download") {
+    return {
+      ...header,
+      responseType: "blob",
+    };
+  }
+  return header;
 };
-const fileUploadHeaders = {
-  headers: {
-    "Content-Type": "multipart/form-data",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-};
-const fileDownloadHeaders = {
-  headers: {
-    "Content-Type":
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-};
+
 export async function loginApi(data) {
   try {
-    const response = await axios.post(`${API_URL}auth/login`, data, headers);
-    console.info("Api Login Res:", response.data);
+    const response = await axios.post(
+      `${API_URL}auth/login`,
+      data,
+      generateHeader()
+    );
+    console.info("Api Login Res:",);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -34,8 +41,12 @@ export async function loginApi(data) {
 
 export async function registerApi(data) {
   try {
-    const response = await axios.post(`${API_URL}auth/register`, data, headers);
-    console.info("Api SignUp Res:", response.data);
+    const response = await axios.post(
+      `${API_URL}auth/register`,
+      data,
+      generateHeader()
+    );
+    console.info("Api SignUp Res:");
     return response.data;
   } catch (error) {
     console.error(error);
@@ -45,7 +56,7 @@ export async function registerApi(data) {
 
 export async function getUser() {
   try {
-    const response = await axios.get(`${API_URL}auth/user`, headers);
+    const response = await axios.get(`${API_URL}auth/user`, generateHeader());
     console.info("Api User Res:", response.data);
     return response.data;
   } catch (error) {
@@ -57,7 +68,8 @@ export async function getUser() {
 export async function getAllTasks() {
   try {
     // console.log(localStorage.getItem("token"));
-    const response = await axios.get(`${API_URL}task`, headers);
+    // console.log(generateHeader());
+    const response = await axios.get(`${API_URL}task`, generateHeader());
     console.table(response?.data?.tasks);
     return response.data;
   } catch (error) {
@@ -67,7 +79,7 @@ export async function getAllTasks() {
 }
 export async function getTaskById(id) {
   try {
-    const response = await axios.get(`${API_URL}task/${id}`, headers);
+    const response = await axios.get(`${API_URL}task/${id}`, generateHeader());
     console.info("Api Task Res:", response.data);
     return response.data;
   } catch (error) {
@@ -77,7 +89,7 @@ export async function getTaskById(id) {
 }
 export async function createTask(data) {
   try {
-    const response = await axios.post(`${API_URL}task`, data, headers);
+    const response = await axios.post(`${API_URL}task`, data, generateHeader());
     console.info("Api Create Task Res:", response.data);
     return response.data;
   } catch (error) {
@@ -87,7 +99,11 @@ export async function createTask(data) {
 }
 export async function updateTask(id, data) {
   try {
-    const response = await axios.put(`${API_URL}task/${id}`, data, headers);
+    const response = await axios.put(
+      `${API_URL}task/${id}`,
+      data,
+      generateHeader("upload")
+    );
     console.info("Api Update Task Res:", response.data);
     return response;
   } catch (error) {
@@ -97,7 +113,10 @@ export async function updateTask(id, data) {
 }
 export async function deleteTask(id) {
   try {
-    const response = await axios.delete(`${API_URL}task/${id}`, headers);
+    const response = await axios.delete(
+      `${API_URL}task/${id}`,
+      generateHeader()
+    );
     console.info("Api Delete Task Res:", response.data);
     return response.data;
   } catch (error) {
@@ -107,11 +126,10 @@ export async function deleteTask(id) {
 }
 export async function exportTasks(fileType) {
   try {
-    const response = await axios.get(`${API_URL}task/export?${fileType==='csv'?'format=csv':''}`, {
-      ...fileDownloadHeaders,
-      responseType: "blob",
-    });
-
+    const response = await axios.get(
+      `${API_URL}task/export${fileType === "csv" ? "?format=csv" : ""}`,
+      generateHeader("download")
+    );
     console.info("Api Export Task Res:", response.data);
     return response.data;
   } catch (error) {
@@ -124,7 +142,7 @@ export async function importTasks(data) {
     const response = await axios.post(
       `${API_URL}task/import`,
       data,
-      fileUploadHeaders
+      generateHeader("upload")
     );
     console.info("Api Import Task Res:", response.data);
     return response;
