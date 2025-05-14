@@ -89,7 +89,7 @@ export default function Register() {
 
   return (
     <div
-      className={`flex mt-1 p-4 ${
+      className={`flex p-4 ${
         winSize.width < 768 ? "items-start" : "items-center"
       } justify-center min-h-[88vh] bg-gray-100 dark:bg-gray-900`}
     >

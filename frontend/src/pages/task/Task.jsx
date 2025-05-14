@@ -60,7 +60,7 @@ const Task = () => {
   // console.log(width, "width");
   
   return (
-    <div style={{scrollbarWidth:'none'}} className=" flex  flex-col w-full h-screen overflow-scroll p-6 bg-gray-100 dark:bg-gray-900 scrollbar-none">
+    <div style={{scrollbarWidth:'none'}} className="items-start w-full h-screen overflow-scroll p-6 bg-gray-100 dark:bg-gray-900 scrollbar-none">
       <Outlet
         context={{
           width,

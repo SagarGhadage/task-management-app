@@ -60,11 +60,11 @@ export default function Login() {
   };
   return (
     <div
-      className={`flex mt-1 p-4 items-${
+      className={`flex p-4 items-${
         winSize.width < 768 ? "baseline" : "center"
       } justify-center min-h-[90vh] bg-gray-100 dark:bg-gray-900`}
     >
-      <form className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <form className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 h-fit">
         <h2 className="mb-6 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">
           Login
         </h2>
