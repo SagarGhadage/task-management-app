@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteTask, getTaskById } from "../../api/api";
+import {  getTaskById } from "../../api/api";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 

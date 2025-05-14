@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { importTasks } from "../../api/api";
 import { useSnackbar } from "notistack";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const TasksUpload = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  // const { fetchTasks } = useOutletContext();
   const [file, setFile] = useState(null);
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -39,7 +38,6 @@ const TasksUpload = () => {
 
       if (response?.status === 201) {
         enqueueSnackbar("File uploaded successfully!", { variant: "success" });
-        // fetchTasks();
         setFile(null);
         navigate("/tasks");
       } else if (response?.data?.error) {

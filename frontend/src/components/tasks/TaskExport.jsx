@@ -1,7 +1,5 @@
 import React from "react";
-import { Link, useOutletContext } from "react-router-dom";
 import { exportTasks } from "../../api/api";
-// import { exportTasks } from '../../api/api'
 
 export default function TaskExport({ user, fileType, link }) {
   const handleExport = async () => {

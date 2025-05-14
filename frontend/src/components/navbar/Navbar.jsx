@@ -143,13 +143,13 @@ export default function Navbar() {
                 Import Tasks
               </Link>
               <Link
-                to="/tasks/import"
+                // to="/tasks/import"
                 className="text-gray-800 text-xl w-full text-center dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]"
               >
                 <TaskExport link />
               </Link>
               <Link
-                to="/tasks/import"
+                // to="/tasks/import"
                 className="text-gray-800 text-xl w-full text-center dark:text-gray-100 hover:text-blue-500 hover:scale-110 dark:hover:text-[#ffb600]"
               >
                 <TaskExport fileType={'csv'} link/>
