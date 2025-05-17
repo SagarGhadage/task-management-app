@@ -1,7 +1,7 @@
 import axios from "axios";
 const API_URL_Local = "http://localhost:8082/v1/";
 const API_URL_ONLINE = "https://task-management-app-7yzg.onrender.com/v1/";
-const API_URL = API_URL_ONLINE;
+const API_URL = API_URL_Local;
 const generateHeader = (type) => {
   const header = {
     headers: {
@@ -89,6 +89,7 @@ export async function getTaskById(id) {
 }
 export async function createTask(data) {
   try {
+    console.log(data)
     const response = await axios.post(`${API_URL}task`, data, generateHeader());
     console.info("Api Create Task Res:", response.data);
     return response.data;
@@ -99,10 +100,11 @@ export async function createTask(data) {
 }
 export async function updateTask(id, data) {
   try {
+    console.log(data)
     const response = await axios.put(
       `${API_URL}task/${id}`,
       data,
-      generateHeader("upload")
+      generateHeader()
     );
     console.info("Api Update Task Res:", response.data);
     return response;
